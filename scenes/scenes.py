@@ -66,7 +66,8 @@ What do you do?""",
     choice_str2 = tk.Button(
         root,
         text="Hide inside a destroyed bus",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=lambda:bus(root)
     )
     choice_str2.pack(pady=10)
 
@@ -149,3 +150,64 @@ def hospital(root):
     )
     choice_hos3.pack(pady=10)
 
+# police
+def police(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    police_label = tk.Label(
+        root,
+        text="""A police officer bursts out of the office, gun raised.
+"Stop! Don’t move! I know what you are… you’re mutated!"
+What will you do?""",
+        font=('impact', 25)
+    )
+    police_label.pack(pady=20)
+# police choices
+
+    choice_pol1 = tk.Button(
+        root,
+        text="Try to reason with the officer",
+        font=('impact', 25)
+    )
+    choice_pol1.pack(pady=10)
+
+    choice_pol2 = tk.Button(
+        root,
+        text="Run past him",
+        font=('impact', 25)
+    )
+    choice_pol2.pack(pady=10)
+
+    choice_pol3 = tk.Button(
+        root,
+        text="Defend yourself",
+        font=('impact', 25)
+    )
+    choice_pol3.pack(pady=10)
+
+    # bus
+def bus(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    bus_label = tk.Label(
+        root,
+        text="""You hear the bus engine roar to life. The bus lurches forward.
+"Hold on tight!" the driver shouts, eyes wild.
+The vehicle careens recklessly into a mutant, sending it flying, before smashing violently into a wall. You wake up, disoriented, after losing consciousness.
+A sharp pain grips your leg—you feel something biting you.
+Panic sets in as you realize blood is streaming down, and darkness begins to close in…""",
+        font=('impact', 20),
+        wraplength=900, #source https://stackoverflow.com/questions/55241150/tkinter-wraplength-units-is-pixels
+    )
+    bus_label.pack(pady=20, padx=20)
+# bus choices
+
+    restart = tk.Button(
+        root,
+        text="Try again",
+        font=('impact', 25),
+        command=start_game
+    )
+    restart.pack(pady=10)
