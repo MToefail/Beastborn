@@ -1,6 +1,7 @@
 import tkinter as tk #source: https://www.youtube.com/watch?v=ibf5cx221hk
 from scenes import scenes
 
+
 def start_game():
     titlescreen.pack_forget() #source: https://stackoverflow.com/questions/25101618/forget-versus-grid-forget-python?utm_source
     start.pack_forget()
@@ -22,4 +23,3 @@ start = tk.Button(root, text="Start New Game", font=('impact', 25), command=star
 start.pack(padx=200, pady=200)
 
 root.mainloop()
-
