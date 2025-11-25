@@ -168,25 +168,57 @@ What will you do?""",
     choice_pol1 = tk.Button(
         root,
         text="Try to reason with the officer",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=lambda:reason(root)
     )
     choice_pol1.pack(pady=10)
 
     choice_pol2 = tk.Button(
         root,
         text="Run past him",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=lambda:run(root)
     )
     choice_pol2.pack(pady=10)
 
     choice_pol3 = tk.Button(
         root,
         text="Defend yourself",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=Defend
     )
     choice_pol3.pack(pady=10)
 
-    # bus
+
+    # Endings
+
+#reason
+def reason(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    reason_label = tk.Label(
+        root,
+        text="""You take a deep breath and raise your hands.
+“Wait! I’m not what you think!” you shout.
+The officer hesitates, eyes narrowing. After tense moments, he lowers his gun.
+“Alright… let’s get out of here,” he mutters.
+Together, you slip past the chaos, moving through deserted streets until the city’s skyline disappears behind you. Freedom, at last.""",
+        font=('impact', 25),
+        wraplength=900
+    )
+    reason_label.pack(pady=20)
+
+    restart = tk.Button(
+        root,
+        text="Try again",
+        font=('impact', 25),
+        command=intro_game(root)
+    )
+    restart.pack(pady=10)
+
+#Bus
+
 def bus(root):
     for widget in root.winfo_children():
         widget.destroy()
@@ -199,15 +231,15 @@ The vehicle careens recklessly into a mutant, sending it flying, before smashing
 A sharp pain grips your leg—you feel something biting you.
 Panic sets in as you realize blood is streaming down, and darkness begins to close in…""",
         font=('impact', 20),
-        wraplength=900, #source https://stackoverflow.com/questions/55241150/tkinter-wraplength-units-is-pixels
+        wraplength=900 #source https://stackoverflow.com/questions/55241150/tkinter-wraplength-units-is-pixels
     )
     bus_label.pack(pady=20, padx=20)
 # bus choices
 
-    restart = tk.Button(
+    restart2 = tk.Button(
         root,
         text="Try again",
         font=('impact', 25),
-        command=start_game
+        command=intro_game(root)
     )
-    restart.pack(pady=10)
+    restart2.pack(pady=10)

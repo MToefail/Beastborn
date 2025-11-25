@@ -1,5 +1,6 @@
 import tkinter as tk #source: https://www.youtube.com/watch?v=ibf5cx221hk
 from scenes import scenes
+from PIL import Image, ImageTk
 
 
 def start_game():
