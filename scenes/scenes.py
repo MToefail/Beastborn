@@ -2,7 +2,6 @@ import tkinter as tk
 
 # intro
 def intro_game(root):
-    # Clear previous widgets
     for widget in root.winfo_children():
         widget.destroy()
 
@@ -28,14 +27,16 @@ Where will you go?""",
     choice_int2 = tk.Button(
         root,
         text="Crawl into the maintenance tunnel",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=lambda: tunnel(root)
     )
     choice_int2.pack(pady=10)
 
     choice_int3 = tk.Button(
         root,
         text="Break into the hospital sector",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=lambda: hospital(root)
     )
     choice_int3.pack(pady=10)
 
@@ -57,7 +58,8 @@ What do you do?""",
     choice_str1 = tk.Button(
         root,
         text="Run toward the police barricade",
-        font=('impact', 25)
+        font=('impact', 25),
+        command=lambda:police(root)
     )
     choice_str1.pack(pady=10)
 
@@ -74,3 +76,76 @@ What do you do?""",
         font=('impact', 25)
     )
     choice_str3.pack(pady=10)
+
+# tunnel
+def tunnel(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tunnel_label = tk.Label(
+        root,
+        text="""You crawl into the maintenance tunnels
+        Something crawls in the dark
+        Your move?""",
+        font=('impact', 25)
+    )
+    tunnel_label.pack(pady=20)
+
+    choice_tun1 = tk.Button(
+        root,
+        text="Sneak past quietly",
+        font=('impact', 25)
+    )
+    choice_tun1.pack(pady=10)
+
+    choice_tun2 = tk.Button(
+        root,
+        text="Throw a rock",
+        font=('impact', 25)
+    )
+    choice_tun2.pack(pady=10)
+
+    choice_tun3 = tk.Button(
+        root,
+        text="Charge forward",
+        font=('impact', 25)
+    )
+    choice_tun3.pack(pady=10)
+
+# hospital
+def hospital(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    hospital_label = tk.Label(
+        root,
+        text="""You break into the ruined hospital
+        A sealed sample glows bright green
+        What do you do?""",
+        font=('impact', 25)
+    )
+    hospital_label.pack(pady=20)
+
+# hospital choices
+
+    choice_hos1 = tk.Button(
+        root,
+        text="Search the labs",
+        font=('impact', 25)
+    )
+    choice_hos1.pack(pady=10)
+
+    choice_hos2 = tk.Button(
+        root,
+        text="Look for survivors",
+        font=('impact', 25)
+    )
+    choice_hos2.pack(pady=10)
+
+    choice_hos3 = tk.Button(
+        root,
+        text="Open the glowing sample",
+        font=('impact', 25)
+    )
+    choice_hos3.pack(pady=10)
+
