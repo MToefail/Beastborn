@@ -1,245 +1,156 @@
-import tkinter as tk
+#SCENE HELPER
+def show_scene(engine, text, background, choices):
+    engine.set_story(text)
+    engine.set_background(background)
+    engine.make_choice_buttons(choices)
 
-# intro
-def intro_game(root):
-    for widget in root.winfo_children():
-        widget.destroy()
 
-    intro = tk.Label(
-        root,
-        text="""You awaken in a collapsed subway tunnel.
-Dust fills the air. You hear distant screeches.
-Where will you go?""",
-        font=('impact', 25)
+#TITLE SCREEN
+def title_screen(engine):
+    engine.play_music("assets/music/bgm.mp3")
+
+    show_scene(
+        engine,
+        text=(
+            "BEASTBORN\n\n"
+            "A post-apocalyptic survival tale\n\n"
+            "Press Start to begin"
+        ),
+        background="assets/images/title.jpg",
+        choices=[
+            ("Start Game", lambda: start_game(engine))
+        ],
     )
-    intro.pack(pady=20)
 
-#intro choice
 
-    choice_int1 = tk.Button(
-        root,
-        text="Climb the broken ladder to the streets",
-        font=('impact', 25),
-        command=lambda: streets(root)
+
+# START GAME
+def start_game(engine):
+    show_scene(
+        engine,
+        text=(
+            "You awaken in a collapsed subway tunnel.\n"
+            "Dust fills the air. You hear distant screeches.\n\n"
+            "Where will you go?"
+        ),
+        background="assets/images/subway.webp",
+        choices=[
+            ("Climb the broken ladder to the streets", lambda: streets(engine), "assets/sfx/bus.mp3"),
+            ("Crawl into the maintenance tunnel", lambda: maintenance(engine), "assets/sfx/ladder.mp3"),
+            ("Break into the hospital sector", lambda: hospital(engine), "assets/sfx/hospital.mp3"),
+        ],
     )
-    choice_int1.pack(pady=10)
 
-    choice_int2 = tk.Button(
-        root,
-        text="Crawl into the maintenance tunnel",
-        font=('impact', 25),
-        command=lambda: tunnel(root)
+
+
+#SCENES
+def streets(engine):
+    show_scene(
+        engine,
+        text=(
+            "The streets are burning.\n"
+            "Creatures move between abandoned cars.\n\n"
+            "What do you do?"
+        ),
+        background="assets/images/streets.jpg",
+        choices=[
+            ("Run to the police station", lambda: ending_survivor(engine),),
+            ("Hide in a bus", lambda: ending_wanderer(engine),"assets/sfx/bus.mp3"),
+            ("Follow a blood trail", lambda: ending_death(engine),"assets/sfx/death.mp3"),
+        ],
     )
-    choice_int2.pack(pady=10)
 
-    choice_int3 = tk.Button(
-        root,
-        text="Break into the hospital sector",
-        font=('impact', 25),
-        command=lambda: hospital(root)
+
+def maintenance(engine):
+    show_scene(
+        engine,
+        text=(
+            "You crawl into the maintenance tunnels.\n"
+            "Something crawls in the dark.\n\n"
+            "Your move?"
+        ),
+        background="assets/images/tunnel.webp",
+        choices=[
+            ("Sneak past quietly", lambda: ending_wanderer(engine)),
+            ("Throw a rock", lambda: ending_death(engine)),
+            ("Charge forward", lambda: ending_death(engine)),
+        ],
     )
-    choice_int3.pack(pady=10)
 
 
-# street
-def streets(root):
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    streets_label = tk.Label(
-        root,
-        text="""The streets are burning.
-Creatures move between abandoned cars.
-What do you do?""",
-        font=('impact', 25)
+def hospital(engine):
+    show_scene(
+        engine,
+        text=(
+            "You break into the ruined hospital.\n"
+            "A sealed sample glows bright green.\n\n"
+            "What do you do?"
+        ),
+        background="assets/images/hospital.jpg",
+        choices=[
+            ("Search the labs", lambda: ending_failed_cure(engine)),
+            ("Look for survivors", lambda: ending_survivor(engine)),
+            ("Open the glowing sample...", lambda: ending_mutation(engine)),
+        ],
     )
-    streets_label.pack(pady=20)
 
-    choice_str1 = tk.Button(
-        root,
-        text="Run toward the police barricade",
-        font=('impact', 25),
-        command=lambda:police(root)
+
+#ENDINGS
+def ending_survivor(engine):
+
+    show_scene(
+        engine,
+        text="ENDING: THE LAST FLIGHT\n\nYou escape the city alive.",
+        background="assets/images/survivor.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
     )
-    choice_str1.pack(pady=10)
 
-    choice_str2 = tk.Button(
-        root,
-        text="Hide inside a destroyed bus",
-        font=('impact', 25),
-        command=lambda:bus(root)
+
+def ending_wanderer(engine):
+    show_scene(
+        engine,
+        text="ENDING: THE RUINS WANDERER\n\nYou wander the wasteland alone.",
+        background="assets/images/wanderer.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
     )
-    choice_str2.pack(pady=10)
 
-    choice_str3 = tk.Button(
-        root,
-        text="Search abandoned apartments",
-        font=('impact', 25)
+
+def ending_death(engine):
+    show_scene(
+        engine,
+        text="ENDING: DEATH\n\nThe mutants overwhelm you.",
+        background="assets/images/death.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
     )
-    choice_str3.pack(pady=10)
 
-# tunnel
-def tunnel(root):
-    for widget in root.winfo_children():
-        widget.destroy()
 
-    tunnel_label = tk.Label(
-        root,
-        text="""You crawl into the maintenance tunnels
-        Something crawls in the dark
-        Your move?""",
-        font=('impact', 25)
+def ending_failed_cure(engine):
+    show_scene(
+        engine,
+        text="ENDING: FAILED CURE\n\nYou tried to help. Science failed you.",
+        background="assets/images/lab.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
     )
-    tunnel_label.pack(pady=20)
 
-    choice_tun1 = tk.Button(
-        root,
-        text="Sneak past quietly",
-        font=('impact', 25)
+
+def ending_mutation(engine):
+    show_scene(
+        engine,
+        text=(
+            "ENDING: BIRTH OF A BEAST\n\n"
+            "Your skin burns. Your bones twist.\n"
+            "You become one of them."
+        ),
+        background="assets/images/mutation.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
     )
-    choice_tun1.pack(pady=10)
-
-    choice_tun2 = tk.Button(
-        root,
-        text="Throw a rock",
-        font=('impact', 25)
-    )
-    choice_tun2.pack(pady=10)
-
-    choice_tun3 = tk.Button(
-        root,
-        text="Charge forward",
-        font=('impact', 25)
-    )
-    choice_tun3.pack(pady=10)
-
-# hospital
-def hospital(root):
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    hospital_label = tk.Label(
-        root,
-        text="""You break into the ruined hospital
-        A sealed sample glows bright green
-        What do you do?""",
-        font=('impact', 25)
-    )
-    hospital_label.pack(pady=20)
-
-# hospital choices
-
-    choice_hos1 = tk.Button(
-        root,
-        text="Search the labs",
-        font=('impact', 25)
-    )
-    choice_hos1.pack(pady=10)
-
-    choice_hos2 = tk.Button(
-        root,
-        text="Look for survivors",
-        font=('impact', 25)
-    )
-    choice_hos2.pack(pady=10)
-
-    choice_hos3 = tk.Button(
-        root,
-        text="Open the glowing sample",
-        font=('impact', 25)
-    )
-    choice_hos3.pack(pady=10)
-
-# police
-def police(root):
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    police_label = tk.Label(
-        root,
-        text="""A police officer bursts out of the office, gun raised.
-"Stop! Don’t move! I know what you are… you’re mutated!"
-What will you do?""",
-        font=('impact', 25)
-    )
-    police_label.pack(pady=20)
-# police choices
-
-    choice_pol1 = tk.Button(
-        root,
-        text="Try to reason with the officer",
-        font=('impact', 25),
-        command=lambda:reason(root)
-    )
-    choice_pol1.pack(pady=10)
-
-    choice_pol2 = tk.Button(
-        root,
-        text="Run past him",
-        font=('impact', 25),
-        command=lambda:run(root)
-    )
-    choice_pol2.pack(pady=10)
-
-    choice_pol3 = tk.Button(
-        root,
-        text="Defend yourself",
-        font=('impact', 25),
-        command=Defend
-    )
-    choice_pol3.pack(pady=10)
-
-
-    # Endings
-
-#reason
-def reason(root):
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    reason_label = tk.Label(
-        root,
-        text="""You take a deep breath and raise your hands.
-“Wait! I’m not what you think!” you shout.
-The officer hesitates, eyes narrowing. After tense moments, he lowers his gun.
-“Alright… let’s get out of here,” he mutters.
-Together, you slip past the chaos, moving through deserted streets until the city’s skyline disappears behind you. Freedom, at last.""",
-        font=('impact', 25),
-        wraplength=900
-    )
-    reason_label.pack(pady=20)
-
-    restart = tk.Button(
-        root,
-        text="Try again",
-        font=('impact', 25),
-        command=intro_game(root)
-    )
-    restart.pack(pady=10)
-
-#Bus
-
-def bus(root):
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    bus_label = tk.Label(
-        root,
-        text="""You hear the bus engine roar to life. The bus lurches forward.
-"Hold on tight!" the driver shouts, eyes wild.
-The vehicle careens recklessly into a mutant, sending it flying, before smashing violently into a wall. You wake up, disoriented, after losing consciousness.
-A sharp pain grips your leg—you feel something biting you.
-Panic sets in as you realize blood is streaming down, and darkness begins to close in…""",
-        font=('impact', 20),
-        wraplength=900 #source https://stackoverflow.com/questions/55241150/tkinter-wraplength-units-is-pixels
-    )
-    bus_label.pack(pady=20, padx=20)
-# bus choices
-
-    restart2 = tk.Button(
-        root,
-        text="Try again",
-        font=('impact', 25),
-        command=intro_game(root)
-    )
-    restart2.pack(pady=10)
