@@ -94,6 +94,9 @@ def make_choice_buttons(choices):
         )
         btn.pack(pady=10)
 
+def stop_sfx():
+    pygame.mixer.stop()
+
 #MUSIC
 import pygame
 pygame.mixer.init()
@@ -122,9 +125,9 @@ class Engine:
     set_story = staticmethod(set_story)
     set_background = staticmethod(set_background)
     make_choice_buttons = staticmethod(make_choice_buttons)
-    clear_buttons = staticmethod(clear_buttons)
     play_music = staticmethod(play_music)
-    stop_music = staticmethod(stop_music)
+    play_sfx = staticmethod(play_sfx)
+    stop_sfx = staticmethod(stop_sfx)
 
 
 

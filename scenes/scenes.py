@@ -97,7 +97,7 @@ def hospital(engine):
 
 #ENDINGS
 def ending_survivor(engine):
-
+    engine.stop_sfx()
     show_scene(
         engine,
         text="ENDING: THE LAST FLIGHT\n\nYou escape the city alive.",
@@ -109,10 +109,11 @@ def ending_survivor(engine):
 
 
 def ending_wanderer(engine):
+    engine.stop_sfx()
     show_scene(
         engine,
         text="ENDING: THE RUINS WANDERER\n\nYou wander the wasteland alone.",
-        background="assets/images/wanderer.jpg",
+        background="assets/images/wanderer.webp",
         choices=[
             ("Try Again", lambda: title_screen(engine))
         ],
@@ -120,6 +121,7 @@ def ending_wanderer(engine):
 
 
 def ending_death(engine):
+    engine.stop_sfx()
     show_scene(
         engine,
         text="ENDING: DEATH\n\nThe mutants overwhelm you.",
@@ -131,6 +133,7 @@ def ending_death(engine):
 
 
 def ending_failed_cure(engine):
+    engine.stop_sfx()
     show_scene(
         engine,
         text="ENDING: FAILED CURE\n\nYou tried to help. Science failed you.",
@@ -142,6 +145,7 @@ def ending_failed_cure(engine):
 
 
 def ending_mutation(engine):
+    engine.stop_sfx()
     show_scene(
         engine,
         text=(
