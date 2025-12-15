@@ -54,8 +54,8 @@ def streets(engine):
         ),
         background="assets/images/streets.jpg",
         choices=[
-            ("Run to the police station", lambda: ending_survivor(engine),),
-            ("Hide in a bus", lambda: ending_wanderer(engine),"assets/sfx/bus.mp3"),
+            ("Run to the police station", lambda: police_officer(engine),"assets/sfx/freedom.mp3"),
+            ("Hide in a bus", lambda: bus_crash(engine),"assets/sfx/bus.mp3"),
             ("Follow a blood trail", lambda: ending_death(engine),"assets/sfx/death.mp3"),
         ],
     )
@@ -154,6 +154,37 @@ def ending_mutation(engine):
             "You become one of them."
         ),
         background="assets/images/mutation.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
+    )
+
+def bus_crash(engine):
+    engine.stop_sfx()
+    show_scene(
+        engine,
+        text=(
+            "ENDING: BUS CRASH\n\n"
+            "The driver hits the gas, dodges a mutant, and crashes into a wall.\n"
+            "You barely survive, but the door is jammed. You die of hunger.”"
+        ),
+        background="assets/images/Crash.jpg",
+        choices=[
+            ("Try Again", lambda: title_screen(engine))
+        ],
+    )
+
+
+def police_officer(engine):
+    engine.stop_sfx()
+    show_scene(
+        engine,
+        text=(
+            "ENDING: Free, but at what cost\n\n"
+            "A police officer points his gun at you. After checking you for mutations,\n"
+            "he escorts you out of the city. You are free—but you have nowhere to go.”"
+        ),
+        background="assets/images/survivor.jpg",
         choices=[
             ("Try Again", lambda: title_screen(engine))
         ],
