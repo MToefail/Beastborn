@@ -1,4 +1,4 @@
-import tkinter as tk
+import tkinter as tk #https://www.youtube.com/watch?v=ibf5cx221hk&t=999s
 from PIL import Image, ImageTk
 from scenes.scenes import title_screen
 
